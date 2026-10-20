@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.sound.SinOsc;
 
 public class NoteBall {
     private Note note;
@@ -6,16 +7,17 @@ public class NoteBall {
     private int speed;
     private int xPos;
     private int yPos;
-    private int colorVal1;
-    private int colorVal2;
-    private int colorVal3;
+    private SinOsc oscillator;
+    private int soundStopTime;
+    private boolean soundPlaying;
 
-    public NoteBall(int xPos, int yPos, int speed, Note note) {
+    public NoteBall(int xPos, int yPos, int speed, Note note, SinOsc oscillator) {
         this.radius = 15;
-        this.speed = 4;
+        this.speed = 2;
         this.xPos = xPos;
         this.yPos = 300;
         this.note = note;
+        this.oscillator = oscillator;
     }
 
     public void move() {
@@ -41,8 +43,16 @@ public class NoteBall {
         return yPos;
     }
 
-    public void playNote() {
+    public void playNote(PApplet p) {
+        oscillator.play(note.getFrequency(), 0.5f);
+        soundStopTime = p.millis() + 500;
+        soundPlaying = true;
+    }
 
+    public void updateSound(PApplet p) {
+        if(p.millis() > soundStopTime && soundPlaying) {
+            oscillator.stop();
+        }
     }
 
 }

@@ -35,52 +35,52 @@ public class Main extends PApplet {
         strokeWeight(10);
         line(midLineX1, midLineY, midLineX2, midLineY);
 
-        oscillator = new SinOsc(this);
+     //   oscillator = new SinOsc(this);
 //        oscillator.play(420,0.5f);
     }
 
 
     public void keyPressed() {
-        NoteBall ball;
+        SinOsc oscillator = new SinOsc(this);
+        NoteBall ball = null;
+
         if(key == 'a') {
-            ball = new NoteBall(80*(numBalls+1), 300, 5, Note.A);
+            ball = new NoteBall(80*(numBalls+1), 300, 5, Note.A, oscillator);
             balls.add(ball);
             numBalls++;
-
-            oscillator.play(420, 0.2f);
-            soundStopTime = millis() + 1000;
-            soundPlaying = true;
         }
         if(key == 'b') {
-            ball = new NoteBall(80*(numBalls+1), 50, 5, Note.B);
+            ball = new NoteBall(80*(numBalls+1), 50, 5, Note.B, oscillator);
             balls.add(ball);
             numBalls++;
         }
         if(key == 'c') {
-            ball = new NoteBall(80*(numBalls+1), 50, 5, Note.C);
+            ball = new NoteBall(80*(numBalls+1), 50, 5, Note.C, oscillator);
             balls.add(ball);
             numBalls++;
         }
         if(key == 'd') {
-            ball = new NoteBall(80*(numBalls+1), 50, 5, Note.D);
+            ball = new NoteBall(80*(numBalls+1), 50, 5, Note.D, oscillator);
             balls.add(ball);
             numBalls++;
         }
         if(key == 'e') {
-            ball = new NoteBall(80*(numBalls+1), 50, 5, Note.E);
+            ball = new NoteBall(80*(numBalls+1), 50, 5, Note.E, oscillator);
             balls.add(ball);
             numBalls++;
         }
         if(key == 'f') {
-            ball = new NoteBall(80*(numBalls+1), 50, 5, Note.F);
+            ball = new NoteBall(80*(numBalls+1), 50, 5, Note.F, oscillator);
             balls.add(ball);
             numBalls++;
         }
         if(key == 'g') {
-            ball = new NoteBall(80*(numBalls+1), 50, 5, Note.G);
+            ball = new NoteBall(80*(numBalls+1), 50, 5, Note.G, oscillator);
             balls.add(ball);
             numBalls++;
         }
+
+        ball.playNote(this);
 
     }
 
@@ -97,17 +97,12 @@ public class Main extends PApplet {
         for(NoteBall ball : balls) {
             ball.move();
             ball.display(this);
-            if(ball.getyPos() >= midLineY) {
-                ball.playNote();
+            if(ball.getyPos() == midLineY) {
+                ball.playNote(this);
             }
+            ball.updateSound(this);
         }
 
-        if(soundPlaying && millis() >= soundStopTime) {
-            oscillator.stop();
-            soundPlaying = false;
-        }
     }
-
-
 
 }
