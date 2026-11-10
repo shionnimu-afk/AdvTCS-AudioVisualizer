@@ -13,7 +13,7 @@ public class NoteBall {
 
     public NoteBall(int xPos, int yPos, int speed, Note note, SinOsc oscillator) {
         this.radius = 15;
-        this.speed = 2;
+        this.speed = 5;
         this.xPos = xPos;
         this.yPos = 300;
         this.note = note;
