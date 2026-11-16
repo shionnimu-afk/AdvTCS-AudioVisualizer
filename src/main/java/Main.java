@@ -5,28 +5,63 @@ import processing.sound.*;
 
 public class Main extends PApplet {
 
+    public enum Program_State {
+        Main_Menu,
+        Comp1,
+        Comp2
+    }
+
     private Component1 component1;
+    private Program_State currentState = Program_State.Main_Menu;
 
     public static void main(String[] args) {
         PApplet.main("Main");
     }
 
     public void settings() {
-        size(1200,600);
+        size(1200, 600);
 
     }
 
     public void setup() {
+        background(0);
         component1 = new Component1(this);
     }
 
 
     public void keyPressed() {
-        component1.handleKeyPressed(key);
+        if(currentState == Program_State.Main_Menu) {
+            setProgramState(key);
+        }
+        else if(currentState == Program_State.Comp1) {
+            component1.handleKeyPressed(key);
+        }
+    }
+
+    public void setProgramState(char key) {
+        if(key == '1') {
+            currentState = Program_State.Comp1;
+        }
+        if(key == '2') {
+            currentState = Program_State.Comp2;
+        }
+
     }
 
     public void draw() {
-        component1.draw();
-    }
+        if(currentState == Program_State.Main_Menu) {
+            background(0);
+            fill(255);
+            text("1", 50, 50);
+            text("2", 100, 50);
+        }
+        if (currentState == Program_State.Comp1) {
+            component1.draw();
+        }
+        if (currentState == Program_State.Comp2) {
+            //component2.draw();
+        }
 
+
+    }
 }

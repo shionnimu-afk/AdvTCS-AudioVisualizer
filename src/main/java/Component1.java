@@ -22,9 +22,7 @@ public class Component1 {
         p.background(0);
         p.stroke(255,255,255);
         p.strokeWeight(5);
-        for(int pos = 80; pos <= 80*numLines; pos+=80) {
-            p.line(pos, 50, pos, 550);
-        }
+        numLines = 0;
         p.strokeWeight(10);
         p.line(midLineX1, midLineY, midLineX2, midLineY);
     }
@@ -75,13 +73,14 @@ public class Component1 {
     public void draw() {
 
         p.background(0);
-        p.stroke(255,255,255);
+        p.stroke(50);
         p.strokeWeight(5);
-        for(int pos = 80; pos <= 80*numLines; pos+=80) {
+        for(int pos = 80; pos <= 80*numBalls; pos+=80) {
             p.line(pos, 50, pos, 550);
         }
         p.strokeWeight(10);
         p.line(20,300,1180,300);
+
 
         for(NoteBall ball : balls) {
             ball.move();
