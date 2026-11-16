@@ -55,4 +55,23 @@ public class NoteBall {
         }
     }
 
+    public void changeTempo(int val) {
+        if(val == 1) {
+            if(speed > 0) {
+                speed++;
+            }
+            else {
+                speed--;
+            }
+        }
+        else if(val == -1) {
+            if (speed > 0) {
+                speed--;
+            }
+            else {
+                speed++;
+            }
+        }
+    }
+
 }

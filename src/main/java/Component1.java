@@ -27,7 +27,23 @@ public class Component1 {
         p.line(midLineX1, midLineY, midLineX2, midLineY);
     }
 
-    public void handleKeyPressed(char key) {
+    public void handleKeyPressed(char key, int keyCode) {
+        // Changes the speed of the NoteBalls
+        if(key == PApplet.CODED && keyCode == PApplet.UP) {
+            for(NoteBall ball : balls) {
+                ball.changeTempo(1);
+            }
+            return;
+        }
+        else if(key == PApplet.CODED && keyCode == PApplet.DOWN) {
+            for(NoteBall ball : balls) {
+                ball.changeTempo(-1);
+            }
+            return;
+        }
+
+        // Adds a NoteBall if preconditions are met
+
         SinOsc oscillator = new SinOsc(p);
         NoteBall ball = null;
 
@@ -80,6 +96,10 @@ public class Component1 {
         }
         p.strokeWeight(10);
         p.line(20,300,1180,300);
+
+        p.textSize(15);
+        p.fill(200);
+        p.text("Change TEMPO with Up and Down arrow keys", 800, 570);
 
 
         for(NoteBall ball : balls) {

@@ -34,7 +34,7 @@ public class Main extends PApplet {
             setProgramState(key);
         }
         else if(currentState == Program_State.Comp1) {
-            component1.handleKeyPressed(key);
+            component1.handleKeyPressed(key, keyCode);
         }
     }
 
@@ -52,8 +52,9 @@ public class Main extends PApplet {
         if(currentState == Program_State.Main_Menu) {
             background(0);
             fill(255);
-            text("1", 50, 50);
-            text("2", 100, 50);
+            textSize(40);
+            text("Component 1 (click 1)", 50, 50);
+            text("Component 2 (WILL NOT RUN)", 50, 150);
         }
         if (currentState == Program_State.Comp1) {
             component1.draw();
